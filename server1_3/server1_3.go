@@ -16,6 +16,7 @@ func handleFunc(w http.ResponseWriter, r *http.Request) {
 		if r.ParseForm() != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			w.Write([]byte(`{"text":"unable to parse form"}`))
+			return
 		} else {
 			rec, ok := r.Form["name"]
 			if !ok {
@@ -32,6 +33,7 @@ func handleFunc(w http.ResponseWriter, r *http.Request) {
 		w.Write(resp)
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
+		w.Write([]byte(`{"text":"method is not allowed"}`))
 	}
 }
 
